@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>UServe - Organizer Dashboard</title>
+    <link rel="stylesheet" href="style.css">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+<body>
+    <div class="dashboard-container">
+        <!-- Sidebar -->
+        <div class="sidebar">
+            <h2>🌟 UServe</h2>
+            <nav>
+                <button class="nav-btn active" onclick="showPage('dashboard')">📊 Dashboard</button>
+                <button class="nav-btn" onclick="showPage('eventManagement')">📅 Event Management</button>
+                <button class="nav-btn" onclick="showPage('certificates')">📜 e-Certificates</button>
+                <button class="nav-btn" onclick="showPage('gratuity')">💰 Gratuity</button>
+                <button class="nav-btn" onclick="showPage('issueReport')">⚠️ Issue Report</button>
+                <button class="nav-btn" onclick="showPage('profile')">👤 Profile</button>
+            </nav>
+            <button onclick="logout()" class="btn-logout">🚪 Logout</button>
+        </div>
+
+        <!-- Main Content -->
+        <div class="main-content">
+            <!-- Dashboard Page -->
+            <div id="dashboardPage" class="page active">
+                <h2>Dashboard</h2>
+                <div id="analyticsContainer" class="analytics-grid">
+                    <div class="stat-card">Loading...</div>
+                </div>
+                <div class="chart-container">
+                    <canvas id="analyticsChart"></canvas>
+                </div>
+            </div>
+
+            <!-- Event Management Page -->
+            <div id="eventManagementPage" class="page">
+                <div class="page-header">
+                    <h2>Event Management</h2>
+                    <button class="btn btn-primary" onclick="showCreateEventModal()">+ Create Event</button>
+                </div>
+                <div id="eventsList" class="events-list"></div>
+                
+                <!-- Volunteers Section -->
+                <h3 style="margin-top: 30px;">Volunteers Management</h3>
+                <select id="eventSelect" class="form-select" onchange="loadVolunteers()">
+                    <option value="">Select Event to View Volunteers</option>
+                </select>
+                <div id="volunteersTable" class="table-container"></div>
+                
+                <!-- Events Report Section -->
+                <h3 style="margin-top: 30px;">Events Report</h3>
+                <button class="btn btn-secondary" onclick="generateEventReport()">Generate Report</button>
+                <div id="eventReportsTable" class="table-container"></div>
+            </div>
+
+            <!-- e-Certificates Page -->
+            <div id="certificatesPage" class="page">
+                <h2>e-Certificate Generator</h2>
+                <select id="certEventSelect" class="form-select" onchange="loadCertificates()">
+                    <option value="">Select Event to Generate Certificates</option>
+                </select>
+                <button class="btn btn-primary" onclick="generateCertificates()">Generate e-Certificates for Present Volunteers</button>
+                <div id="certificatesList" class="certificates-list"></div>
+            </div>
+
+            <!-- Gratuity Page -->
+            <div id="gratuityPage" class="page">
+                <h2>Gratuity Management</h2>
+                <div id="gratuityTable" class="table-container"></div>
+            </div>
+
+            <!-- Issue Report Page -->
+            <div id="issueReportPage" class="page">
+                <h2>Report an Issue</h2>
+                <div class="card">
+                    <div class="form-group">
+                        <label>Issue Details</label>
+                        <textarea id="issueDetails" rows="5" placeholder="Describe the issue you're experiencing..."></textarea>
+                    </div>
+                    <button class="btn btn-primary" onclick="submitIssueReport()">Submit Report</button>
+                </div>
+                <h3 style="margin-top: 30px;">My Reports</h3>
+                <div id="myReportsList" class="reports-list"></div>
+            </div>
+
+            <!-- Profile Page -->
+            <div id="profilePage" class="page">
+                <h2>Organizer Profile</h2>
+                <div class="card">
+                    <div id="profileInfo"></div>
+                    <hr>
+                    <h3>Change Password</h3>
+                    <div class="form-group">
+                        <label>Current Password</label>
+                        <input type="password" id="currentPassword" class="form-control">
+                    </div>
+                    <div class="form-group">
+                        <label>New Password</label>
+                        <input type="password" id="newPassword" class="form-control">
+                        <small>8+ chars, uppercase, lowercase, number, special character</small>
+                    </div>
+                    <div class="form-group">
+                        <label>Confirm New Password</label>
+                        <input type="password" id="confirmPassword" class="form-control">
+                    </div>
+                    <button class="btn btn-primary" onclick="updatePassword()">Update Password</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+<!-- Create Event Modal -->
+<div id="createEventModal" class="modal">
+    <div class="modal-content">
+        <span class="close" onclick="closeModal()">&times;</span>
+        <h3>Create New Event</h3>
+        <div class="form-group">
+            <label>Event Name</label>
+            <input type="text" id="eventName" class="form-control">
+        </div>
+        <div class="form-group">
+            <label>Description</label>
+            <textarea id="eventDesc" rows="3" class="form-control"></textarea>
+        </div>
+        <div class="form-row">
+            <div class="form-group">
+                <label>Date</label>
+                <input type="date" id="eventDate" class="form-control">
+            </div>
+            <div class="form-group">
+                <label>Time</label>
+                <input type="time" id="eventTime" class="form-control">
+            </div>
+        </div>
+        <div class="form-group">
+            <label>Location</label>
+            <input type="text" id="eventLocation" class="form-control">
+        </div>
+        <div class="form-group">
+            <label>Available Slots</label>
+            <input type="number" id="eventSlots" class="form-control" value="50">
+        </div>
+        <button class="btn btn-primary" onclick="createEvent()">Create Event</button>
+    </div>
+</div>
+
+    <script src="script.js"></script>
+</body>
+</html>

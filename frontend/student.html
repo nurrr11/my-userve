@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>UServe - Student Dashboard</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="dashboard-container">
+        <div class="sidebar">
+            <h2>🌟 UServe</h2>
+            <nav>
+                <button class="nav-btn active" onclick="showPage('events')">📋 Available Events</button>
+                <button class="nav-btn" onclick="showPage('myEvents')">✅ My Events</button>
+                <button class="nav-btn" onclick="showPage('certificates')">📜 My Certificates</button>
+                <button class="nav-btn" onclick="showPage('profile')">👤 Profile</button>
+            </nav>
+            <button onclick="logout()" class="btn-logout">🚪 Logout</button>
+        </div>
+        <div class="main-content">
+            <div id="eventsPage" class="page active">
+                <h2>Available Volunteer Events</h2>
+                <div id="eventsList" class="events-grid"></div>
+            </div>
+            <div id="myEventsPage" class="page">
+                <h2>My Registered Events</h2>
+                <div id="myEventsList" class="events-grid"></div>
+            </div>
+            <div id="certificatesPage" class="page">
+                <h2>My Certificates</h2>
+                <div id="certificatesList"></div>
+            </div>
+            <div id="profilePage" class="page">
+                <h2>My Profile</h2>
+                <div class="card" id="profileInfo"></div>
+            </div>
+        </div>
+    </div>
+    <script src="script.js"></script>
+</body>
+</html>
