@@ -3,38 +3,91 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://cdn.jsdelivr.net/npm/fullcalendar@6.1.10/index.global.min.js"></script>
     <title>UServe - Student Dashboard</title>
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
     <div class="dashboard-container">
         <div class="sidebar">
-            <h2>🌟 UServe</h2>
+            <h2>🌟 UServe Student</h2>
             <nav>
-                <button class="nav-btn active" onclick="showPage('events')">📋 Available Events</button>
-                <button class="nav-btn" onclick="showPage('myEvents')">✅ My Events</button>
-                <button class="nav-btn" onclick="showPage('certificates')">📜 My Certificates</button>
-                <button class="nav-btn" onclick="showPage('profile')">👤 Profile</button>
+                <button class="nav-btn active" onclick="showPage('studentDashboard')">🏠 Dashboard</button>
+                <button class="nav-btn" onclick="showPage('studentProfile')">👤 Profile</button>
+                <button class="nav-btn" onclick="showPage('studentCalendar')">📅 Calendar</button>
+                <button class="nav-btn" onclick="showPage('activityRecord')">📜 Activity Record</button>
+                <button class="nav-btn" onclick="showPage('studentIssue')">⚠️ Issue Report</button>
+                <button class="nav-btn" onclick="showPage('studentChat')">💬 Chat</button>
+                <button class="nav-btn" onclick="logout()">🚪 Logout</button>
             </nav>
-            <button onclick="logout()" class="btn-logout">🚪 Logout</button>
         </div>
+
         <div class="main-content">
-            <div id="eventsPage" class="page active">
-                <h2>Available Volunteer Events</h2>
-                <div id="eventsList" class="events-grid"></div>
+            <div id="studentDashboardPage" class="page active">
+                <h1>Available Opportunities</h1>
+                <div id="availableEventsList" class="events-grid"></div>
             </div>
-            <div id="myEventsPage" class="page">
-                <h2>My Registered Events</h2>
-                <div id="myEventsList" class="events-grid"></div>
+
+            <div id="studentProfilePage" class="page" style="display:none;">
+                <h1>My Profile</h1>
+                <div id="studentProfileDetails" class="card"></div>
             </div>
-            <div id="certificatesPage" class="page">
-                <h2>My Certificates</h2>
-                <div id="certificatesList"></div>
+
+            <div id="studentCalendarPage" class="page" style="display:none;">
+                <h1>My Schedule</h1>
+                <p>View all your registered volunteer sessions here.</p>
+                <div id="calendar"></div>
             </div>
-            <div id="profilePage" class="page">
-                <h2>My Profile</h2>
-                <div class="card" id="profileInfo"></div>
+
+            <div id="activityRecordPage" class="page" style="display:none;">
+                <div class="header-flex">
+                    <h1>📜 My Activity Record</h1>
+                    <button class="btn btn-secondary" onclick="window.print()">🖨️ Print Transcript</button>
+                </div>
+
+                <div class="stats-grid" id="studentStats">
+                    <div class="stat-card">
+                        <h3 id="totalJoined">0</h3>
+                        <p>Events Joined</p>
+                    </div>
+                    <div class="stat-card">
+                        <h3 id="totalPresent">0</h3>
+                        <p>Completed (Present)</p>
+                    </div>
+                </div>
+
+                <div class="card">
+                    <h3>Volunteer History</h3>
+                    <div class="table-responsive">
+                        <table class="table">
+                            <thead>
+                                <tr>
+                                    <th>Event Name</th>
+                                    <th>Date</th>
+                                    <th>Organizer</th>
+                                    <th>Status</th>
+                                    <th>Certificate</th>
+                                </tr>
+                            </thead>
+                            <tbody id="studentActivityTable"></tbody>
+                        </table>
+                    </div>
+                </div>
             </div>
+
+            <div id="studentIssuePage" class="page" style="display:none;">
+                <h1>🚩 Report an Issue</h1>
+                <div class="card">
+                    <div class="form-group">
+                        <label>Issue Details</label>
+                        <textarea id="issueDetails" rows="5" class="form-control" placeholder="Describe the issue you're experiencing... (e.g., technical glitch, student misconduct, equipment damage)"></textarea>
+                        <br>
+                    </div>
+                    <button class="btn btn-primary" onclick="submitIssueReport()">Submit Report to Admin</button>
+                </div>
+                <h2 style="margin-top: 30px;">My Previous Reports</h2>
+                <div id="myReportsList" class="reports-list"></div>
+            </div>    
         </div>
     </div>
     <script src="script.js"></script>

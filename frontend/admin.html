@@ -5,31 +5,73 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>UServe - Admin Dashboard</title>
     <link rel="stylesheet" href="style.css">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 </head>
 <body>
     <div class="dashboard-container">
         <div class="sidebar">
-            <h2>🌟 UServe</h2>
+            <h2>👑 UServe Admin</h2>
             <nav>
-                <button class="nav-btn active" onclick="showPage('approve')">✅ Approve Students</button>
-                <button class="nav-btn" onclick="showPage('reports')">📋 Issue Reports</button>
-                <button class="nav-btn" onclick="showPage('analytics')">📊 Analytics</button>
+                <button class="nav-btn active" onclick="showPage('adminDashboard')">📊 Dashboard Analytics</button>
+                <button class="nav-btn" onclick="showPage('adminProfile')">👤 Admin Profile</button>
+                <button class="nav-btn" onclick="showPage('userApproval')">✅ User Approval</button>
+                <button class="nav-btn" onclick="showPage('issueCentre')">📋 Issue Report Centre</button>
+                <button class="nav-btn" onclick="showPage('adminChat')">💬 Admin Chat</button>
             </nav>
             <button onclick="logout()" class="btn-logout">🚪 Logout</button>
         </div>
+
         <div class="main-content">
-            <div id="approvePage" class="page active">
-                <h2>Pending Student Approvals</h2>
-                <div id="pendingStudents"></div>
+            
+            <div id="adminDashboardPage" class="page active">
+                <h2>System Overview & Analytics</h2>
+                <div id="adminAnalyticsContainer" class="analytics-grid">
+                    </div>
+                <div class="chart-container" style="position: relative; margin-top: 30px; max-width: 500px; margin-left: auto; margin-right: auto;">
+                    <canvas id="adminAnalyticsChart"></canvas>
+                </div>
             </div>
-            <div id="reportsPage" class="page">
-                <h2>Issue Reports</h2>
-                <div id="issueReportsList"></div>
+
+            <div id="adminProfilePage" class="page">
+                <h2>Administrative Profile</h2>
+                <div id="adminProfileInfo">
+                    </div>
             </div>
-            <div id="analyticsPage" class="page">
-                <h2>System Analytics</h2>
-                <div id="analyticsData"></div>
+
+            <div id="userApprovalPage" class="page">
+                <h2>Pending Student Registrations</h2>
+                <p class="text-muted">Review incoming student enrollment submissions requiring system activation clearance.</p>
+                <div class="table-responsive" style="margin-top: 20px;">
+                    <table class="table" style="width: 100%; border-collapse: collapse;">
+                        <thead>
+                            <tr style="background-color: #f8f9fa; border-bottom: 2px solid #dee2e6; text-align: left;">
+                                <th style="padding: 12px;">Student Name</th>
+                                <th style="padding: 12px;">Student ID</th>
+                                <th style="padding: 12px;">Email Address</th>
+                                <th style="padding: 12px;">Contact Number</th>
+                                <th style="padding: 12px;">Actions</th>
+                            </tr>
+                        </thead>
+                        <tbody id="pendingUsersTable">
+                            </tbody>
+                    </table>
+                </div>
             </div>
+
+            <div id="issueCentrePage" class="page">
+                <h2>Centralized Issue Reports</h2>
+                <p class="text-muted">Global tracking ledger for technical support tickets logged by platform Volunteers and Organizers.</p>
+                <div id="globalIssueRecords" style="margin-top: 20px;">
+                    </div>
+            </div>
+
+            <div id="adminChatPage" class="page">
+                <h2>In-App Chat Workspace</h2>
+                <p class="text-muted">Real-time terminal workspace dedicated to localized client communication handling.</p>
+                <div id="adminChatContainer" style="margin-top: 20px;">
+                    </div>
+            </div>
+
         </div>
     </div>
     <script src="script.js"></script>

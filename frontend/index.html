@@ -37,8 +37,8 @@
                 <button onclick="login()" class="btn btn-primary">Login</button>
                 
                 <div class="divider"><span>Don't have an account?</span></div>
-                <button onclick="window.location.href='student.html?action=signup'" class="btn btn-secondary">Sign Up as Student</button>
-
+                <p>Don't have an account? <a href="#" onclick="toggleAuth(true)">Register here</a></p>
+                
                 <div class="demo-info">
                     <p><strong>Demo Accounts:</strong></p>
                     <p>Student: student@userve.com / Student@123</p>
@@ -46,6 +46,18 @@
                     <p>Admin: admin@userve.com / Admin@123</p>
                 </div>
             </div>
+        </div>
+
+        <div id="registerBox" class="card" style="display:none;">
+            <h2>📝 Student Registration</h2>
+            <input type="text" id="regID" placeholder="Student ID (e.g., 2023...)" class="form-control">
+            <input type="text" id="regName" placeholder="Full Name" class="form-control">
+            <input type="email" id="regEmail" placeholder="Email Address" class="form-control">
+            <input type="password" id="regPass" placeholder="Create Password" class="form-control">
+            <input type="text" id="regContact" placeholder="Contact Number" class="form-control">
+            <input type="date" id="regDOB" placeholder="Student DOB" class="form-control">
+            <button class="btn btn-primary" onclick="handleRegister()">Sign Up</button>
+            <p>Already have an account? <a href="#" onclick="toggleAuth(false)">Login here</a></p>
         </div>
     </div>
     <script src="script.js"></script>
